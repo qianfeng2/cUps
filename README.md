@@ -11,6 +11,8 @@ Our **cUps** algorithm is for **c**lassifying the malaria *var* genes into **ups
 
 ### Input and output 
 - Fasta format DBLα sequences to be classified (refer to query sequences).
+
+
 - Reference data which consist of (1) reference DBLα sequences, each sequence is annotated with DBLα subclass and ups group; (2) profile HMM for each reference category (combination of DBLα subclass and ups group). Please see [reference_data](https://github.com/qianfeng2/cUps/tree/main/reference_data) folder for details.
 
 
