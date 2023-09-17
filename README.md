@@ -3,7 +3,7 @@ A probabilistic method for classifying ups groups of the malaria *var* genes
 [![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
 ### About
-This algorithm is .
+This cUps algorithm is for **c**lassifying the malaria *var* genes into **ups** groups using DBLa sequences. 
 
 
 ### Required softwares
@@ -52,7 +52,7 @@ Rscript scripts/classify_upsABC.R your_output_dir
 
 ### Credits
 
-This algorithm is developed by Qian Feng, Heejung Shim and Yao-ban Chan at the University of Melbourne. For any problems, please report an issue in Github or send an email to [Qian Feng](mailto:fengq2@student.unimelb.edu.au)
+This algorithm is developed by Qian Feng, Heejung Shim and Yao-ban Chan at the University of Melbourne. For any problems, please report an issue in Github or send an email to [Qian Feng](mailto:fengq2@student.unimelb.edu.au).
 
 
 
