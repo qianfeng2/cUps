@@ -1,4 +1,4 @@
-A probabilistic method for classifying ups groups of the malaria *var* genes
+A probabilistic method for classifying the malaria *var* genes into ups groups 
 -----------------------
 [![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
