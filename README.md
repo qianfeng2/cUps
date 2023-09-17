@@ -17,14 +17,10 @@ Our **cUps** algorithm is for **c**lassifying the malaria *var* genes into **ups
 Our algorithm produces four csv files based on various algorithmic stages, and places them in the directory specified by output. 
 
 
-- log-likelihood tables (middle output)
-
-For each query sequence, its likelihood for being drawn from the profile HMM under each category is computed.
+- Log-likelihood tables (middle output). For each query sequence, its likelihood for being drawn from the profile HMM under each category is computed.
 
 
-- classification result table (final output)
-
-Each row starts with sequence ID and shows the probabilities of membership to three ups groups. For instance:  
+- Classification result table (final output). Each row starts with the sequence ID and shows the probabilities of membership to three ups groups. An example table is as following.  
 
 |         | A  | B  | C  | 
 | ------------|------------|------------|------------|
@@ -54,9 +50,9 @@ python scripts/generate_llk.py query_data/example.fasta your_output_dir
 Rscript scripts/classify_upsABC.R your_output_dir
 ```
 
-The python script is to generate the log-likelihood of query sequences for every profile HMM, it outputs three tables (PAD.csv, PBD.csv and PCD.csv) representating the results under upsA, upsB and upsC group. For every table, each row refers to a query sequence, each column refers to a DBLα subclass, the entry is the log-likelihood value.
+The python script is to generate the log-likelihood of query sequences for every profile HMM of reference categories. This script outputs three tables (PAD.csv, PBD.csv and PCD.csv) representating the results under upsA, upsB and upsC group. For every table, each row refers to a query sequence, each column refers to a DBLα subclass, the entry is the log-likelihood value.
 
-The R script is to calculate the posterior probabilities for each query sequence. The reference data is replaceable.
+The R script is to calculate the posterior probabilities for each query sequence. The reference data is replaceable. The final result is shown at classification_result.csv.
 
 As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results) folder provides all the middle and final output files for the example.fasta stored in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder. 
 
