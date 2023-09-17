@@ -4,24 +4,26 @@ A probabilistic method for classifying ups groups of the malaria *var* genes
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
 
 ### About
-This **cUps** algorithm is for **c**lassifying the malaria *var* genes into **ups** groups using DBLα sequences. It takes as input a reference database of DBLα sequences with known ups groups and a set of DBLα sequences to be classified, and outputs the probabilities of membership to all three ups groups per sequence.
+Our **cUps** algorithm is for **c**lassifying the malaria *var* genes into **ups** groups using DBLα sequences. It takes as input a reference database of DBLα sequences with known ups groups and a set of DBLα sequences to be classified, and outputs the probabilities of membership to all three ups groups per sequence.
 
 
 
 
 ### Input and output 
-- Input fasta format DBLα sequences to be classified.
-- Input reference data which consist of (1) reference DBLα sequences, each sequence is annotated with DBLα subclass and ups group; (2) profile HMM for each reference category (combination of DBLα subclass and ups group).  (please see [reference_data](https://github.com/qianfeng2/cUps/tree/main/reference_data) sub folder)
+- Fasta format DBLα sequences to be classified (refer to query sequences).
+- Reference data which consist of (1) reference DBLα sequences, each sequence is annotated with DBLα subclass and ups group; (2) profile HMM for each reference category (combination of DBLα subclass and ups group). Please see [reference_data](https://github.com/qianfeng2/cUps/tree/main/reference_data) folder for details.
 
 
 Our algorithm produces four csv files based on various algorithmic stages, and places them in the directory specified by output. 
 
 
 - log-likelihood tables (middle output)
-Foe each sequence to be classified (refer to query sequence), its likelihood for being drawn from the profile HMM of each category is computed.
+
+For each query sequence, its likelihood for being drawn from the profile HMM under each category is computed.
 
 
 - classification result table (final output)
+
 Each row starts with sequence ID and shows the probabilities of membership to three ups groups. For instance:  
 
 |         | A  | B  | C  | 
@@ -52,11 +54,11 @@ python scripts/generate_llk.py query_data/example.fasta your_output_dir
 Rscript scripts/classify_upsABC.R your_output_dir
 ```
 
-The python script is to generate the log-likelihood of query sequences under every profile HMM, it outputs three tables (PAD.csv, PBD.csv and PCD.csv) representating the results under upsA, upsB and upsC group. For every table, each row is a query sequence, each column is a DBLα subclass, the entry represents the log-likelihood.
+The python script is to generate the log-likelihood of query sequences for every profile HMM, it outputs three tables (PAD.csv, PBD.csv and PCD.csv) representating the results under upsA, upsB and upsC group. For every table, each row refers to a query sequence, each column refers to a DBLα subclass, the entry is the log-likelihood value.
 
-The R script is to calcuate the posterior probabilities for each query sequence. The reference data is replaceable.
+The R script is to calculate the posterior probabilities for each query sequence. The reference data is replaceable.
 
-[results](https://github.com/qianfeng2/cUps/tree/main/results) folder, as a toy example, provides all the middle and final output files for the example.fasta stored in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder. 
+As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results) folder provides all the middle and final output files for the example.fasta stored in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder. 
 
 
 ### Credits
