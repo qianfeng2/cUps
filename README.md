@@ -95,6 +95,7 @@ python scripts/generate_llk.py query_data/example_bigdata_split_files/input_run$
 Rscript scripts/classify_upsABC.R results/example_bigdata/run_${SLURM_ARRAY_TASK_ID}
 ```
 
+The results for each subset are shown in [results/example_bigdata](https://github.com/qianfeng2/cUps/tree/main/results/example_bigdata) folder.
 
 ### Note
 
