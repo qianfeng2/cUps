@@ -96,11 +96,12 @@ Rscript scripts/classify_upsABC.R results/example_bigdata/run_${SLURM_ARRAY_TASK
 
 ### Note
 
+
+- For the format of sequence identifier, althouth the blank space is not allowed inside the identifier, punctuations (e.g., "|", ";", "_", "-") generally do not break our scripts.
+
 - Our algorithm only accepts the protein sequences as input. If your data is DNA, please translate it.
 
-- For the format of identifier in each protein sequence, althouth the blank space is not allowed inside the identifier, punctuations (e.g., "|", ";", "_", "-") generally do not break our algorithm.
-
-- Please run your own data inside the cUps directory, as our algorithm relies on the information from reference_data directory. 
+- Always run your data inside the cUps directory, as our algorithm relies on the information from reference_data directory. 
 
 
 ### Credits
