@@ -168,48 +168,59 @@ def read_PHMM( PHMM ):
 
 
 
-
-
-PHMM_file_name=['DBLa0.1','DBLa0.10','DBLa0.11','DBLa0.12','DBLa0.13','DBLa0.14','DBLa0.15','DBLa0.16','DBLa0.17','DBLa0.18','DBLa0.19','DBLa0.2','DBLa0.20','DBLa0.21','DBLa0.22','DBLa0.23','DBLa0.24','DBLa0.3','DBLa0.4','DBLa0.5','DBLa0.6','DBLa0.7','DBLa0.8','DBLa0.9','DBLa1.1','DBLa1.2','DBLa1.3','DBLa1.4','DBLa1.5','DBLa1.6','DBLa1.7','DBLa1.8','DBLa2']
-header1=["seqID"];header=header1+PHMM_file_name[0:33]
-with open(output_PAD_csv, 'a+') as outfile:
-    outfile.write(",".join([str(l) for l in header]) + "\n")
-with open(output_PBD_csv, 'a+') as outfile:
-    outfile.write(",".join([str(l) for l in header]) + "\n")
-with open(output_PCD_csv, 'a+') as outfile:
-    outfile.write(",".join([str(l) for l in header]) + "\n")    
-
-
+seqs_full="";
 for seq_record in SeqIO.parse(input_fasta, "fasta"):
-    zero_dict={};
-    for i in PHMM_file_name[0:33]: zero_dict[i]=0
-    log_prob_XAD = [];log_prob_XAD.append(str(seq_record.id))
-    for PHMM_file in glob.glob("reference_data/upsA/*.hmm"):
-        subclass=PHMM_file.split("upsA/")[1].split(".hmm")[0] 
-        zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));   
-    log_prob_XAD=log_prob_XAD+list(zero_dict.values())
+    seqs_full=seqs_full+str(seq_record.seq)#check sequences
+    
+if "X" in seqs_full:
+    print("Error: your sequence contains X which is not general amino acid, please remove!")
+    exit()
+elif len(seqs_full)==0:
+    print("Error: your sequence is empty!")
+    exit()
+else:
+    PHMM_file_name=['DBLa0.1','DBLa0.10','DBLa0.11','DBLa0.12','DBLa0.13','DBLa0.14','DBLa0.15','DBLa0.16','DBLa0.17','DBLa0.18','DBLa0.19','DBLa0.2','DBLa0.20','DBLa0.21','DBLa0.22','DBLa0.23','DBLa0.24','DBLa0.3','DBLa0.4','DBLa0.5','DBLa0.6','DBLa0.7','DBLa0.8','DBLa0.9','DBLa1.1','DBLa1.2','DBLa1.3','DBLa1.4','DBLa1.5','DBLa1.6','DBLa1.7','DBLa1.8','DBLa2']
+    header1=["seqID"];header=header1+PHMM_file_name[0:33]
     with open(output_PAD_csv, 'a+') as outfile:
-        outfile.write(",".join([str(l) for l in log_prob_XAD]) + "\n")
-    
-    zero_dict={};
-    for i in PHMM_file_name[0:33]: zero_dict[i]=0
-    log_prob_XBD = [];log_prob_XBD.append(str(seq_record.id))
-    for PHMM_file in glob.glob("reference_data/upsB/*.hmm"):
-        subclass=PHMM_file.split("upsB/")[1].split(".hmm")[0] 
-        zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
-    log_prob_XBD=log_prob_XBD+list(zero_dict.values())
+        outfile.write(",".join([str(l) for l in header]) + "\n")
     with open(output_PBD_csv, 'a+') as outfile:
-        outfile.write(",".join([str(l) for l in log_prob_XBD]) + "\n")
-    
-    zero_dict={};
-    for i in PHMM_file_name[0:33]: zero_dict[i]=0
-    log_prob_XCD = [];log_prob_XCD.append(str(seq_record.id))
-    for PHMM_file in glob.glob("reference_data/upsC/*.hmm"):
-        subclass=PHMM_file.split("upsC/")[1].split(".hmm")[0] 
-        zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
-    log_prob_XCD=log_prob_XCD+list(zero_dict.values())
+        outfile.write(",".join([str(l) for l in header]) + "\n")
     with open(output_PCD_csv, 'a+') as outfile:
-        outfile.write(",".join([str(l) for l in log_prob_XCD]) + "\n") 
+        outfile.write(",".join([str(l) for l in header]) + "\n")    
+
+
+    for seq_record in SeqIO.parse(input_fasta, "fasta"):
+        zero_dict={};
+        for i in PHMM_file_name[0:33]: zero_dict[i]=0
+        log_prob_XAD = [];log_prob_XAD.append(str(seq_record.id))
+        for PHMM_file in glob.glob("reference_data/upsA/*.hmm"):
+            subclass=PHMM_file.split("upsA/")[1].split(".hmm")[0] 
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));   
+        log_prob_XAD=log_prob_XAD+list(zero_dict.values())
+        with open(output_PAD_csv, 'a+') as outfile:
+            outfile.write(",".join([str(l) for l in log_prob_XAD]) + "\n")
+    
+        zero_dict={};
+        for i in PHMM_file_name[0:33]: zero_dict[i]=0
+        log_prob_XBD = [];log_prob_XBD.append(str(seq_record.id))
+        for PHMM_file in glob.glob("reference_data/upsB/*.hmm"):
+            subclass=PHMM_file.split("upsB/")[1].split(".hmm")[0] 
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
+        log_prob_XBD=log_prob_XBD+list(zero_dict.values())
+        with open(output_PBD_csv, 'a+') as outfile:
+            outfile.write(",".join([str(l) for l in log_prob_XBD]) + "\n")
+    
+        zero_dict={};
+        for i in PHMM_file_name[0:33]: zero_dict[i]=0
+        log_prob_XCD = [];log_prob_XCD.append(str(seq_record.id))
+        for PHMM_file in glob.glob("reference_data/upsC/*.hmm"):
+            subclass=PHMM_file.split("upsC/")[1].split(".hmm")[0] 
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
+        log_prob_XCD=log_prob_XCD+list(zero_dict.values())
+        with open(output_PCD_csv, 'a+') as outfile:
+            outfile.write(",".join([str(l) for l in log_prob_XCD]) + "\n") 
+
+
 
 
 

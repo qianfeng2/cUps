@@ -27,22 +27,21 @@ output_dir = args[1]
 library(data.table)
 
 
-#setwd("/Users/fengqian/Downloads/upsABC_global/algorithm/algorithm2/algorithm2_finalmodel/Evaluation_MunHua/MH_update_without_mix")#set working dir
 
-Mun_Hua_data <- fread("reference_data/MH_846_reference.csv", header=TRUE, data.table = FALSE)
-visua_data=cbind(as.matrix(table(Mun_Hua_data$`DBLa domain`)),as.matrix(table(Mun_Hua_data$`DBLa domain`,Mun_Hua_data$UpsType_MCL)))
+reference_data <- fread("reference_data/846_reference_seqs_info.csv", header=TRUE, data.table = FALSE)
+visua_data=cbind(as.matrix(table(reference_data$`DBLa domain`)),as.matrix(table(reference_data$`DBLa domain`,reference_data$UpsType_MCL)))
 colnames(visua_data)=c("count","upsA","upsB","upsC")
 
 prob_subclass <- visua_data[,1]/(colSums(visua_data)[1])
 upsA_prob <- visua_data[,2]/visua_data[,1]
 upsB_prob <- visua_data[,3]/visua_data[,1]
 upsC_prob <- visua_data[,4]/visua_data[,1]
-MH_data_analyze <- as.data.frame(visua_data)
-MH_data_analyze$prob_subclass=prob_subclass
-MH_data_analyze$upsA_prob=upsA_prob
-MH_data_analyze$upsB_prob=upsB_prob
-MH_data_analyze$upsC_prob=upsC_prob
-#MH_data_analyze
+reference_data_analyze <- as.data.frame(visua_data)
+reference_data_analyze$prob_subclass=prob_subclass
+reference_data_analyze$upsA_prob=upsA_prob
+reference_data_analyze$upsB_prob=upsB_prob
+reference_data_analyze$upsC_prob=upsC_prob
+#reference_data_analyze
 
 
 P_xAd=fread(paste0(output_dir,"/PAD.csv"), skip = 1,data.table = TRUE)
@@ -66,8 +65,8 @@ temp <- rep(0,seqnum)
 
 for (i in 1:seqnum){
   P_xAd=rep(0,33);P_xBd=rep(0,33);P_xCd=rep(0,33);
-  P_d=MH_data_analyze$prob_subclass;
-  P_Ad=MH_data_analyze$upsA_prob;P_Bd=MH_data_analyze$upsB_prob;P_Cd=MH_data_analyze$upsC_prob
+  P_d=reference_data_analyze$prob_subclass;
+  P_Ad=reference_data_analyze$upsA_prob;P_Bd=reference_data_analyze$upsB_prob;P_Cd=reference_data_analyze$upsC_prob
   
   
   P_xAd=exp(as.numeric(P_xAd_matrix[i,]));P_xBd=exp(as.numeric(P_xBd_matrix[i,]));P_xCd=exp(as.numeric(P_xCd_matrix[i,]));
