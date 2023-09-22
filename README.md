@@ -61,7 +61,7 @@ As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results)
 
 ### Run example for large number of sequences (>1000 sequences)
 
-Since our algorithm processes each sequence independenly, splitting the big dataset into subsets is recommended. For each subset, you can run our algorithm with the help of HPC.
+Since our algorithm processes each sequence independenly, it would be time-demanding if there are many sequences in the data. Here splitting the big dataset into subsets is therefore recommended. For each subset, you can run our algorithm. With the help of HPC, you can even run all subsets at the same time.
 
 Below I show steps for how to split a data with 1000 sequences (example_bigdata.fasta in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder) and run the subsets simultaneously.
 
