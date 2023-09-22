@@ -59,7 +59,7 @@ The R script is to calculate the posterior probabilities for each query sequence
 As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results) folder provides all the middle and final output files for the example.fasta stored in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder. 
 
 
-### Run example for large number of sequences (>1000 sequences)
+### Run example for large number of sequences (>=1000 sequences)
 
 Since our algorithm processes each sequence independenly, it would be time-demanding if there are many sequences in the data. Here we recommend to split the big dataset into subsets and run our algorithm for each subset. With the help of HPC, you can even run all subsets at the same time.
 
@@ -100,11 +100,11 @@ The results for each subset are shown in [results/example_bigdata](https://githu
 ### Note
 
 
-- For the format of sequence identifier, althouth the blank space is not allowed inside the identifier, punctuations (e.g., "|", ";", "_", "-") generally do not break our scripts.
+- For the format of sequence identifier, although the blank space is not allowed inside the identifier, punctuations (e.g., "|", ";", "_", "-") generally work well with our scripts.
 
 - Our algorithm only accepts the protein sequences as input. If your data is DNA, please translate it.
 
-- Always run your data inside the cUps directory, as our algorithm relies on the information from reference_data directory. 
+- Always run your data inside the cUps directory, as our algorithm relies on the information (priors, profile HMMs) from reference_data directory. 
 
 
 ### Credits
