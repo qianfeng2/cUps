@@ -58,10 +58,12 @@ The R script is to calculate the posterior probabilities for each query sequence
 
 As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results) folder provides all the middle and final output files for the example.fasta stored in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder. 
 
-### Run example for large number of sequences (>1000 sequences)
-Feel free to split the big dataset into subsets, as our algorithm run each sequence one by one. Foe each subset, you can run the scripts under hpc.
 
-Below I show steps how to split an example data with 1000 sequences.
+### Run example for large number of sequences (>1000 sequences)
+
+Since our algorithm processes each sequence independenly, splitting the big dataset into subsets is recommended. For each subset, you can run our algorithm with the help of HPC.
+
+Below I show steps how to split an example data with 1000 sequences and run the subsets simultaneously.
 
 ```
 cd query_data
@@ -71,7 +73,9 @@ mkdir example_bigdata_split_files
 cd ../
 
 python scripts/split_input.py query_data/example_bigdata.fasta query_data/example_bigdata_split_files
+```
 
+```
 cd results
 
 mkdir example_bigdata
@@ -79,17 +83,23 @@ mkdir example_bigdata
 cd example_bigdata
 
 for run in $(seq 1 1 4);do mkdir run_$run;done
+```
 
-cd ../../
+I use job array in HPC to run the subsets in parallel.
 
-for run in $(seq 1 1 4);do python scripts/generate_llk.py query_data/example_bigdata_split_files/input_run${run}.fasta results/example_bigdata/run_$run  && Rscript scripts/classify_upsABC.R results/example_bigdata/run_$run;done
+```
+python scripts/generate_llk.py query_data/example_bigdata_split_files/input_run${SLURM_ARRAY_TASK_ID}.fasta results/example_bigdata/run_${SLURM_ARRAY_TASK_ID}
+
+Rscript scripts/classify_upsABC.R results/example_bigdata/run_${SLURM_ARRAY_TASK_ID}
 ```
 
 
 ### Note
-- Our algorithm only accepts the protein sequences as input. If your data is DNA, please transfer it by yourself.
+
+- Our algorithm only accepts the protein sequences as input. If your data is DNA, please translate it.
 
 - For the format of identifier in each protein sequence, althouth the blank space is not allowed inside the identifier, punctuations (e.g., "|", ";", "_", "-") generally do not break our algorithm.
+
 
 ### Credits
 
