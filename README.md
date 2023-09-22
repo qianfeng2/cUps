@@ -63,7 +63,7 @@ As a toy example, [results](https://github.com/qianfeng2/cUps/tree/main/results)
 
 Since our algorithm processes each sequence independenly, splitting the big dataset into subsets is recommended. For each subset, you can run our algorithm with the help of HPC.
 
-Below I show steps how to split an example data with 1000 sequences and run the subsets simultaneously.
+Below I show steps for how to split a data with 1000 sequences (example_bigdata.fasta in [query_data](https://github.com/qianfeng2/cUps/tree/main/query_data) folder) and run the subsets simultaneously.
 
 ```
 cd query_data
@@ -83,6 +83,8 @@ mkdir example_bigdata
 cd example_bigdata
 
 for run in $(seq 1 1 4);do mkdir run_$run;done
+
+cd ../../
 ```
 
 I use job array in HPC to run the subsets in parallel.
