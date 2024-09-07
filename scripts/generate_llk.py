@@ -167,7 +167,7 @@ def read_PHMM( PHMM ):
 
 
 
-
+# read your input fasta file into python
 seqs_full="";
 for seq_record in SeqIO.parse(input_fasta, "fasta"):
     seqs_full=seqs_full+str(seq_record.seq)#check sequences
@@ -193,9 +193,9 @@ else:
         zero_dict={};
         for i in PHMM_file_name[0:33]: zero_dict[i]=0
         log_prob_XAD = [];log_prob_XAD.append(str(seq_record.id))
-        for PHMM_file in glob.glob("reference_data/upsA/*.hmm"):
+        for PHMM_file in glob.glob("reference_data/upsA/*.hmm"):# read HMM file into python
             subclass=PHMM_file.split("upsA/")[1].split(".hmm")[0] 
-            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));   
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq))); # compute llk for each query belonging to upsA-specific reference categories   
         log_prob_XAD=log_prob_XAD+list(zero_dict.values())
         with open(output_PAD_csv, 'a+') as outfile:
             outfile.write(",".join([str(l) for l in log_prob_XAD]) + "\n")
@@ -205,7 +205,7 @@ else:
         log_prob_XBD = [];log_prob_XBD.append(str(seq_record.id))
         for PHMM_file in glob.glob("reference_data/upsB/*.hmm"):
             subclass=PHMM_file.split("upsB/")[1].split(".hmm")[0] 
-            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));# compute llk for each query belonging to upsB-specific reference categories
         log_prob_XBD=log_prob_XBD+list(zero_dict.values())
         with open(output_PBD_csv, 'a+') as outfile:
             outfile.write(",".join([str(l) for l in log_prob_XBD]) + "\n")
@@ -215,7 +215,7 @@ else:
         log_prob_XCD = [];log_prob_XCD.append(str(seq_record.id))
         for PHMM_file in glob.glob("reference_data/upsC/*.hmm"):
             subclass=PHMM_file.split("upsC/")[1].split(".hmm")[0] 
-            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));
+            zero_dict[str(subclass)]=read_PHMM( str(PHMM_file) ).log_probability(list(str(seq_record.seq)));# compute llk for each query belonging to upsC-specific reference categories
         log_prob_XCD=log_prob_XCD+list(zero_dict.values())
         with open(output_PCD_csv, 'a+') as outfile:
             outfile.write(",".join([str(l) for l in log_prob_XCD]) + "\n") 

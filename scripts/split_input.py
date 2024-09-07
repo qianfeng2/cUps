@@ -35,7 +35,7 @@ output_dir=sys.argv[2]#query_data/split_files
 seqs = {}
 seq_list = []
 
-for seq_record in SeqIO.parse(input_fasta, "fasta"):
+for seq_record in SeqIO.parse(input_fasta, "fasta"):#read data into python
     seqs[str(seq_record.id)] = str(seq_record.seq)
     seq_list.append(str(seq_record.id))
     
