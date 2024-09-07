@@ -2,6 +2,7 @@ A probabilistic method for classifying the malaria *var* genes into ups groups
 -----------------------
 [![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
+[![DOI](https://zenodo.org/badge/692590286.svg)](https://zenodo.org/doi/10.5281/zenodo.13729366)
 
 ### About
 Our **cUps** algorithm is for **c**lassifying the malaria *var* genes into **ups** groups using DBLα sequences. It takes as input a reference database of DBLα sequences with known ups groups and a set of DBLα sequences to be classified, and outputs the probabilities of membership to all three ups groups per sequence.
